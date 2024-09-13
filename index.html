@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Pollo Loco</title>
+    <link rel="stylesheet" href="./build/css/style.css">
+    <script src="./build/models/drawable-object.class.js"></script>
+    <script src="./build/models/movable-objects.class.js"></script>
+    <script src="./build/models/statusbar.class.js"></script>
+    <script src="./build/models/bottlebar.class.js.js"></script>
+    <script src="./build/models/coinbar.class.js"></script>
+    <script src="./build/models/character.class.js"></script>
+    <script src="./build/models/chick.class.js"></script>
+    <script src="./build/models/chicken.class.js"></script>
+    <script src="./build/models/coins.class.js"></script>
+    <script src="./build/models/bottle.class.js"></script>
+    <script src="./build/models/endboss.class.js"></script>
+    <script src="./build/models/cloud.class.js"></script>
+    <script src="./build/models/throwable-object.class.js"></script>
+    <script src="./build/models/world.class.js"></script>
+    <script src="./build/models/background-object.class.js"></script>
+    <script src="./build/models/keyboard.class.js"></script>
+    <script src="./build/models/level.class.js"></script>
+    <script src="./build/levels/level1.js"></script>
+    <script src="./build/js/game.js"></script>
+</head>
+
+<body>
+    <h1>El Pollo Loco</h1>
+    <img id="startImg" src="./assets/img/9_intro_outro_screens/start/startscreen_1.png" width="720" height="480" alt="">
+    <canvas class="d-none" id="canvas" width="720" height="480">
+    </canvas>
+    <button type="button" onclick="init()">Start</button>
+</body>
+
+</html>
