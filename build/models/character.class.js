@@ -116,9 +116,8 @@ class Character extends MovableObjects {
 
             this.world.camera_x = -this.x + 200;
 
-            // Überprüfen, ob 15 Sekunden seit der letzten Aktion vergangen sind
             if (Date.now() - this.lastActionTime > this.idleTimeout) {
-                this.isLongIdle = true; // Nach 15 Sekunden setzen wir das Flag für Long-Idle
+                this.isLongIdle = true;
             }
 
         }, 1000 / 60);
