@@ -10,6 +10,7 @@ class MovableObjects extends DrawableObject {
         this.bottles = 0;
         this.lastHit = 0;
         this.gravityInterval = null;
+        this.hasHit = false;
     }
 
     applyGravity() {
@@ -18,7 +19,7 @@ class MovableObjects extends DrawableObject {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
-        }, 1000 / 25); // 40 FPS für die Schwerkraft
+        }, 1000 / 25);
     }
 
     stopGravity() {

@@ -54,8 +54,9 @@ class World {
             if (enemy.energy > 0) {
                 if (this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isBoss) {
                     enemy.hit();
-                } else if (this.character.isColliding(enemy)) {
+                } else if (this.character.isColliding(enemy) && !enemy.hasHit) {
                     this.character.hit();
+                    enemy.hasHit = true;
                     this.statusBar.setPercentage(this.character.energy);
                 }
             }
