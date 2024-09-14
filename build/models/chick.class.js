@@ -22,11 +22,10 @@ class Chick extends MovableObjects {
         this.energy = 5;
         this.applyGravity();
         this.animate();
-
     }
 
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.energy > 0) {
                 this.moveLeft();
             }
@@ -35,11 +34,11 @@ class Chick extends MovableObjects {
             }
         }, 1000 / 60);
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.energy == 0) {
                 this.playAnimation(this.IMAGES_DEAD);
                 setTimeout(() => {

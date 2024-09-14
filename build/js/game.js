@@ -3,15 +3,16 @@ let startImg;
 let world;
 let keyboard = new Keyboard();
 let intervalIds = [];
-
+const backgroundMusic = new Sound('../../assets/audio/background.mp3', 0.10, true); // Volumen 0.5 und in Schleife
 
 function init() {
     generateElements();
     canvas = document.getElementById('canvas');
-    startImg = document.getElementById('startImg');
+    startScreen = document.getElementById('startScreen');
     canvas.classList.remove('d-none');
-    startImg.classList.add('d-none');
+    startScreen.classList.add('d-none');
     world = new World(canvas, keyboard);
+    backgroundMusic.play();
 }
 
 function setStoppableInterval(fn, time) {

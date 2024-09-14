@@ -22,10 +22,124 @@ h1 {
     text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.5);
 }
 
+#container {
+    position: relative;
+}
+
 .d-none {
     display: none;
 }
 
 canvas {
     background-color: black;
+}
+
+.startButton {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    background-color: orange;
+    color: white;
+    font-family: 'zabras', Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    height: 75px;
+    width: 150px;
+    box-shadow: 2px 2px 2px 4px rgba(255, 255, 255, 0.8);
+    border: 1px solid #fff;
+
+}
+
+.icons {
+    position: absolute;
+    top: 10px;
+    background: transparent;
+    height: 40px;
+    width: 40px;
+    border: 2px solid #fff;
+    border-radius: 2px;
+}
+
+.icons:hover {
+    transform: scale(1.2);
+}
+
+.game {
+    left: 10px;
+}
+
+.info {
+    left: 60px;
+}
+
+.keyboard {
+    left: 110px;
+}
+
+/* .keyboard {
+    left: 130px;
+}
+
+.keyboard {
+    left: 130px;
+}
+
+.keyboard {
+    left: 130px;
+} */
+
+.icons img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+/* Tooltip container */
+.tooltip {
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 80px;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.tooltip .tooltiptext {
+    width: 80px;
+    bottom: -32px;
+    left: 50%;
+    margin-left: -20px;
+    /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    /* At the top of the tooltip */
+    left: 20px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
 }

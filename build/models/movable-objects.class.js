@@ -11,6 +11,7 @@ class MovableObjects extends DrawableObject {
         this.lastHit = 0;
         this.gravityInterval = null;
         this.hasHit = false;
+        this.chickenDeadSound = new Sound('../../assets/audio/chicken_dead.mp3', 0.1);
     }
 
     applyGravity() {
@@ -48,7 +49,7 @@ class MovableObjects extends DrawableObject {
         );
     }
 
-    hit(damage = 15) {
+    hit(damage = 10) {
         // Schaden zufügen und verhindern, dass die Energie unter 0 fällt
         this.energy = Math.max(0, this.energy - damage);
         if (this.energy > 0) {
@@ -62,9 +63,9 @@ class MovableObjects extends DrawableObject {
      */
     collect(itemType) {
         if (itemType === 'coin') {
-            this.coins += 5; // Sammle eine Münze
+            this.coins += 10; // Sammle eine Münze
         } else if (itemType === 'bottle') {
-            this.bottles += 5; // Sammle eine Flasche
+            this.bottles += 10; // Sammle eine Flasche
         }
     }
 
