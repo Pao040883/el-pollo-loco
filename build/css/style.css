@@ -3,6 +3,12 @@
     src: url(../../assets/fonts/Zabars.ttf) format('truetype');
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -14,12 +20,14 @@ body {
     color: #fff;
     font-family: 'zabras', Arial, Helvetica, sans-serif;
     height: 100vh;
+    overflow: hidden;
 }
 
 h1 {
     font-size: 48px;
     letter-spacing: 3px;
     text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.5);
+    margin-bottom: 24px;
 }
 
 #container {
@@ -27,11 +35,12 @@ h1 {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 canvas {
     background-color: black;
+    display: block;
 }
 
 .startButton {
@@ -81,17 +90,25 @@ canvas {
     left: 110px;
 }
 
-/* .keyboard {
-    left: 130px;
+.mute {
+    left: auto;
+    right: 10px;
 }
 
-.keyboard {
-    left: 130px;
+.music {
+    left: auto;
+    right: 60px;
 }
 
-.keyboard {
-    left: 130px;
-} */
+.restart {
+    left: auto;
+    right: 110px;
+}
+
+.home {
+    left: auto;
+    right: 160px;
+}
 
 .icons img {
     height: 100%;
@@ -105,7 +122,8 @@ canvas {
 }
 
 /* Tooltip text */
-.tooltip .tooltiptext {
+.tooltip .tooltiptextleft,
+.tooltip .tooltiptextright {
     visibility: hidden;
     width: 80px;
     background-color: #fff;
@@ -120,11 +138,12 @@ canvas {
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
+.tooltip:hover .tooltiptextleft,
+.tooltip:hover .tooltiptextright {
     visibility: visible;
 }
 
-.tooltip .tooltiptext {
+.tooltip .tooltiptextleft {
     width: 80px;
     bottom: -32px;
     left: 50%;
@@ -132,7 +151,15 @@ canvas {
     /* Use half of the width (120/2 = 60), to center the tooltip */
 }
 
-.tooltip .tooltiptext::after {
+.tooltip .tooltiptextright {
+    width: 80px;
+    bottom: -32px;
+    right: 50%;
+    margin-right: -20px;
+    /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+.tooltip .tooltiptextleft::after {
     content: " ";
     position: absolute;
     bottom: 100%;
@@ -142,4 +169,58 @@ canvas {
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent #fff transparent;
+}
+
+.tooltip .tooltiptextright::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    /* At the top of the tooltip */
+    right: 20px;
+    margin-right: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+}
+
+
+.mobile-controls {
+    /* display: block; */
+    position: absolute;
+    bottom: 10px;
+    background: transparent;
+    height: 80px;
+    width: 80px;
+}
+
+.left {
+    left: 30px;
+}
+
+.right {
+    left: 110px;
+}
+
+.up {
+    right: 110px;
+}
+
+.throw {
+    right: 30px;
+}
+
+@media only screen and (max-width:720px) {
+    h1 {
+        display: none;
+    }
+
+    canvas {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height:480px) {
+    canvas {
+        height: 100vh;
+    }
 }

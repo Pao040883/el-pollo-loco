@@ -26,6 +26,7 @@ class Endboss extends MovableObjects {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
         this.isBoss = true;
+        this.lastHitTime = 0;
         this.setPosition(5000);
         this.setSpeed();
         this.animate();

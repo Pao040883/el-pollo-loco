@@ -26,7 +26,7 @@ class Bottles extends MovableObjects {
     height = 100;
     width = 70;
     isCollected = false;
-    bottleSound = new Sound('../../assets/audio/bottle.mp3', 0.5); // Nutzung der Sound-Klasse
+    bottleSound = setStoppableSound('../../assets/audio/bottle.mp3');
 
     IMAGES = [
         '../../assets/img/6_salsa_bottle/salsa_bottle.png'

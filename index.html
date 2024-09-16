@@ -9,8 +9,6 @@
     <script src="./build/models/drawable-object.class.js"></script>
     <script src="./build/models/movable-objects.class.js"></script>
     <script src="./build/models/statusbar.class.js"></script>
-    <script src="./build/models/bottlebar.class.js.js"></script>
-    <script src="./build/models/coinbar.class.js"></script>
     <script src="./build/models/character.class.js"></script>
     <script src="./build/models/chick.class.js"></script>
     <script src="./build/models/chicken.class.js"></script>
@@ -35,18 +33,37 @@
         <div id="startScreen">
             <img id="startImg" src="./assets/img/9_intro_outro_screens/start/startscreen_1.png" width="720" height="480"
                 alt="">
-            <button class="startButton" type="button" onclick="init()">Start the <br> game</button>
-            <button class="icons game tooltip" type="button" onclick="showStart()"><img src="./assets/img/game_play.png"
-                    alt="Game"><span class="tooltiptext">Start</span></button>
-            <button class="icons info tooltip" type="button" onclick="showInfo()"><img src="./assets/img/info.png"
-                    alt="Infos"><span class="tooltiptext">Infos</span></button>
-            <button class="icons keyboard tooltip" type="button" onclick="showKeyboard()"><img
-                    src="./assets/img/keyboard.png" alt="Keyboard"><span class="tooltiptext">Controls</span></button>
+            <button id="startButton" class="startButton" type="button" onclick="init()">Start the <br> game</button>
+            <button id="gameButton" class="icons game tooltip" type="button" onclick="showStart()"><img
+                    src="./assets/img/game_play.png" alt="Game"><span class="tooltiptextleft">Start</span></button>
+            <button id="infoButton" class="icons info tooltip" type="button" onclick="showInfo()"><img
+                    src="./assets/img/info.png" alt="Infos"><span class="tooltiptextleft">Infos</span></button>
+            <button id="controlsButton" class="icons keyboard tooltip" type="button" onclick="showKeyboard()"><img
+                    src="./assets/img/keyboard.png" alt="Keyboard"><span
+                    class="tooltiptextleft">Controls</span></button>
+            <button class="icons mute tooltip" type="button" onclick="toggleSounds()"><img id="sound"
+                    src="./assets/img/sound_on.png" alt="Mute"><span class="tooltiptextright">Sounds off</span></button>
+            <button class="icons music tooltip" type="button" onclick="toggleBackgroundMusic()"><img id="music"
+                    src="./assets/img/music_on.png" alt="Music"><span class="tooltiptextright">Music
+                    off</span></button>
+            <button id="restartButton" class="icons restart tooltip d-none" type="button" onclick="restart()"><img
+                    src="./assets/img/restart.png" alt="Restart"><span class="tooltiptextright">Restart
+                </span></button>
+            <button id="homeButton" class="icons home tooltip d-none" type="button" onclick="goToHome()"><img
+                    src="./assets/img/home.png" alt="Home"><span class="tooltiptextright">Home
+                </span></button>
+            <canvas class="d-none" id="canvas" width="720" height="480">
+            </canvas>
+            <div id="mobile-controls">
+                <img id="move-left" class="mobile-controls left" src="./assets/img/arrow_circle_left.png" alt="go left">
+                <img id="move-right" class="mobile-controls right" src="./assets/img/arrow_circle_right.png"
+                    alt="go right">
+                <img id="jump" class="mobile-controls up" src="./assets/img/arrow_circle_up.png" alt="jump">
+                <img id="throw-bottle" class="mobile-controls throw" src="./assets/img/throw_circle.png"
+                    alt="throw bottle">
+            </div>
+
         </div>
-
-        <canvas class="d-none" id="canvas" width="720" height="480">
-        </canvas>
-
     </div>
 
 </body>

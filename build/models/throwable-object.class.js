@@ -126,8 +126,8 @@ class ThrowableObject extends MovableObjects {
     throwInterval;
     animateInterval;
     direction;
-    bottleThrow_sound = new Audio('../../assets/audio/bottleThrow.mp3');
-    bottleSplash_sound = new Audio('../../assets/audio/bottleSplash.mp3');
+    bottleThrow_sound = setStoppableSound('../../assets/audio/bottleThrow.mp3');
+    bottleSplash_sound = setStoppableSound('../../assets/audio/bottleSplash.mp3');
     hasThrown = false; // Neues Flag, um den Sound einmal abzuspielen
     hasHit = false;    // Neues Flag für Aufprall
 
@@ -177,7 +177,6 @@ class ThrowableObject extends MovableObjects {
 
             // Wurf-Sound abspielen, aber nur einmal
             if (!this.hasThrown) {
-                this.bottleThrow_sound.volume = 0.03;
                 this.bottleThrow_sound.play();
                 this.hasThrown = true; // Sound wurde einmalig abgespielt
                 this.world.character.updateLastActionTime();

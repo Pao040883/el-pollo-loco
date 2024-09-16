@@ -11,7 +11,8 @@ class MovableObjects extends DrawableObject {
         this.lastHit = 0;
         this.gravityInterval = null;
         this.hasHit = false;
-        this.chickenDeadSound = new Sound('../../assets/audio/chicken_dead.mp3', 0.1);
+        this.chickenDeadSound = setStoppableSound('../../assets/audio/chicken_dead.mp3', false, 0.1);
+        this.endbossDeadSound = setStoppableSound('../../assets/audio/chicken_dead.mp3', false, 0.5);
     }
 
     applyGravity() {
