@@ -27,14 +27,14 @@ class Coins extends MovableObjects {
     height = 120;
     width = 120;
     isCollected = false;
-    coinSound = setStoppableSound('../../assets/audio/coin.mp3'); // Nutzung der Sound-Klasse
+    coinSound = setStoppableSound('./assets/audio/coin.mp3'); // Nutzung der Sound-Klasse
 
     IMAGES = [
-        '../../assets/img/8_coin/coin_1.png'
+        '/assets/img/8_coin/coin_1.png'
     ];
 
     constructor() {
-        super().loadImage('../../assets/img/8_coin/coin_1.png', 0.8);
+        super().loadImage('./assets/img/8_coin/coin_1.png', 0.8);
         this.setPosition();
         this.value = 10;
     }

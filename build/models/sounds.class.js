@@ -279,6 +279,35 @@
 //     }
 // }
 
+// class Sound {
+//     constructor(src, loop = false, initialVolume = 1.0) {
+//         this.audio = new Audio(src);
+//         this.audio.loop = loop;
+//         this.audio.volume = initialVolume;
+//     }
+
+//     play() {
+//         this.audio.play()
+//     }
+
+//     pause() {
+//         this.audio.pause();
+//     }
+
+//     stop() {
+//         this.audio.pause();
+//         this.audio.currentTime = 0; // Setzt die Musik auf den Anfang zurück
+//     }
+
+//     setVolume(volume) {
+//         this.audio.volume = volume;
+//     }
+
+//     mute() {
+//         this.audio.volume = 0;
+//     }
+// }
+
 class Sound {
     constructor(src, loop = false, initialVolume = 1.0) {
         this.audio = new Audio(src);
@@ -287,24 +316,43 @@ class Sound {
     }
 
     play() {
-        this.audio.play().catch(error => console.log(error));
+        if (this.audio && this.audio.paused) {
+            this.audio.play();
+        }
     }
 
     pause() {
-        this.audio.pause();
+        if (this.audio && !this.audio.paused) {
+            this.audio.pause();
+        }
     }
 
     stop() {
-        this.audio.pause();
-        this.audio.currentTime = 0; // Setzt die Musik auf den Anfang zurück
+        if (this.audio) {
+            this.audio.pause();
+            this.audio.currentTime = 0;
+        }
     }
 
     setVolume(volume) {
-        this.audio.volume = volume;
+        if (this.audio) {
+            this.audio.volume = volume;
+        }
     }
 
     mute() {
-        this.audio.volume = 0;
+        if (this.audio) {
+            this.audio.volume = 0;
+        }
+    }
+
+    // Neu: Ressourcen freigeben
+    dispose() {
+        if (this.audio) {
+            this.audio.pause();      // Pausiere das Audio, falls es noch läuft
+            this.audio.src = '';     // Entferne die Quelle, um Ressourcen freizugeben
+            this.audio.load();       // Lade das Audio-Element neu, um es zurückzusetzen
+            this.audio = null;       // Setze die Referenz auf null, um das Audio zu löschen
+        }
     }
 }
-

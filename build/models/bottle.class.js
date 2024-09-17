@@ -26,14 +26,14 @@ class Bottles extends MovableObjects {
     height = 100;
     width = 70;
     isCollected = false;
-    bottleSound = setStoppableSound('../../assets/audio/bottle.mp3');
+    bottleSound = setStoppableSound('./assets/audio/bottle.mp3');
 
     IMAGES = [
-        '../../assets/img/6_salsa_bottle/salsa_bottle.png'
+        './assets/img/6_salsa_bottle/salsa_bottle.png'
     ];
 
     constructor() {
-        super().loadImage('../../assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png');
+        super().loadImage('./assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png');
         this.setPosition();
         this.value = 10;
     }
