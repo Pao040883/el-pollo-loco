@@ -279,7 +279,7 @@ class Chicken extends MovableObjects {
     height = 55;
     width = 70;
     speed = 10;
-    energy = 5;
+    energy = 10;
     chickenSound = setStoppableSound('./assets/audio/chicken.mp3', true);
 
     IMAGES_WALKING = [
@@ -298,7 +298,6 @@ class Chicken extends MovableObjects {
         this.loadImages(this.IMAGES_DEAD);
         this.setPosition();
         this.setSpeed();
-        this.configureSound();  // Sound-Konfiguration beim Erstellen des Objekts
         this.animate();
     }
 
@@ -308,13 +307,6 @@ class Chicken extends MovableObjects {
 
     setSpeed() {
         this.speed = 0.15 + Math.random() * 0.5;
-    }
-
-    configureSound() {
-        // Setze die Lautstärke und Konfiguration für den Sound
-        // this.chickenSound.setVolume(0.01); // Lautstärke auf 0.001 gesetzt
-        // this.chickenSound.audio.loop = false; // Loop deaktiviert
-        // this.startChickenSoundWithPause();
     }
 
     animate() {

@@ -23,7 +23,7 @@ body {
     overflow: hidden;
 }
 
-h1 {
+.header {
     font-size: 48px;
     letter-spacing: 3px;
     text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.5);
@@ -50,8 +50,10 @@ canvas {
 }
 
 #startImg {
-    height: 480px;
-    width: 720px;
+    width: 100svw;
+    height: 100svh;
+    max-height: 480px;
+    max-width: 720px;
 }
 
 .startButton {
@@ -83,6 +85,7 @@ canvas {
     width: 40px;
     border: 2px solid #fff;
     border-radius: 2px;
+    z-index: 999;
 }
 
 .icons:hover {
@@ -273,34 +276,63 @@ canvas {
 }
 
 #feedback {
-    width: 100%;
     height: 100%;
+    object-fit: cover;
+    width: 100svw;
 }
 
+#mobile-orientation {
+    display: none;
+}
 
 @media only screen and (max-width:1040px) {
     .container {
         overflow: hidden;
     }
 
-    h1 {
+    .header {
         display: none;
     }
 
     #mobile-controls {
         display: block;
     }
-
-    canvas,
-    #startImg {
-        width: 100svw;
-    }
 }
 
-@media only screen and (max-height:560px) {
+@media only screen and (max-height:480px) {
 
     canvas,
     #startImg {
         height: 100svh;
+    }
+}
+
+@media screen and (max-width:720px) and (orientation: portrait) {
+
+    #startScreen {
+        display: none;
+    }
+
+    #mobile-orientation {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #mobile-orientation img {
+        height: 100%;
+        width: 100%;
+    }
+
+    .mobile-orientation-header {
+        display: block;
+        font-size: 48px;
+        letter-spacing: 3px;
+        text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.5);
+    }
+
+    p {
+        font-size: 16px;
     }
 }

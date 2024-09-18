@@ -165,6 +165,8 @@ class ThrowableObject extends MovableObjects {
     }
 
     startThrow() {
+        if (this.world.character.isDead()) return;
+
         if (this.world.character.bottles > 0) {
             this.speedY = 20;
             this.applyGravity();
@@ -176,7 +178,7 @@ class ThrowableObject extends MovableObjects {
             this.world.bottleBar.setPercentage(this.world.character.bottles);
 
             // Wurf-Sound abspielen, aber nur einmal
-            if (!this.hasThrown) {
+            if (!this.hasThrown && !soundsMuted) {
                 this.bottleThrow_sound.play();
                 this.hasThrown = true; // Sound wurde einmalig abgespielt
                 this.world.character.updateLastActionTime();
@@ -189,8 +191,6 @@ class ThrowableObject extends MovableObjects {
     }
 
     startAnimation() {
-        console.log(world.character.bottles);
-
         this.animateInterval = setInterval(() => {
             if (this.hitByBottle) {
                 this.stopThrow();
@@ -198,7 +198,7 @@ class ThrowableObject extends MovableObjects {
                 this.playAnimation(this.IMAGES_SPLASH);
 
                 // Aufprall-Sound abspielen, aber nur einmal
-                if (!this.hasHit) {
+                if (!this.hasHit && !soundsMuted) {
                     this.bottleSplash_sound.play();
                     this.hasHit = true; // Splash-Sound wurde einmalig abgespielt
                 }

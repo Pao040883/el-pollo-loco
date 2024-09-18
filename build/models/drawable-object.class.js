@@ -41,7 +41,4 @@ class DrawableObject {
         }
     }
 
-    removeFromCanvas(ctx) {
-        ctx.clearRect(this.x, this.y, this.width, this.height);
-    }
 }

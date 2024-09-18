@@ -99,6 +99,7 @@ class World {
                         bottle.hitByBottle = true;
                     } else if (enemy.isColliding(bottle) && enemy.isBoss) {
                         enemy.hit();
+                        enemy.hurtAnimation();
                         enemy.endbossDeadSound.play();
                         bottle.hitByBottle = true;
                     }

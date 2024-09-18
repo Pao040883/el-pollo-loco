@@ -82,20 +82,21 @@ function generateElements() {
             new BackgroundObject('./assets/img/5_background/layers/1_first_layer/2.png', 719 * 7)
         ],
         [
-            new Coins(),
-            new Coins(),
-            new Coins(),
-            new Coins(),
-            new Coins(),
-            new Coins(),
-            new Coins(),
-            new Coins(),
-            new Coins(),
-            new Coins(),
-            new Coins(),
-            new Coins(),
-            new Coins(),
-            new Coins()
+            new Coins(1000, 200),
+            new Coins(1050, 175),
+            new Coins(1100, 150),
+            new Coins(1150, 125),
+            new Coins(1200, 150),
+            new Coins(1250, 175),
+            new Coins(1300, 200),
+
+            new Coins(2000, 225),
+            new Coins(2050, 250),
+            new Coins(2100, 275),
+            new Coins(2150, 300),
+            new Coins(2200, 275),
+            new Coins(2250, 250),
+            new Coins(2300, 225)
         ],
         [
             new Bottles(),

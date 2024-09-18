@@ -695,6 +695,8 @@ let isMuted = false;
 let soundsMuted = false;
 let backgroundMusic = new Sound('./assets/audio/background.mp3', true, 0.3);
 let allSounds = [];
+let test = false;
+
 
 // Funktion zur Anzeige des Ladebalkens
 function updateLoadingBar(progress) {
@@ -752,10 +754,14 @@ function startGame() {
     if (soundsMuted) {
         muteAllSounds();
     }
+
+    test = false;
+
 }
 
 function restartWorld() {
-    world = null;
+    resetIntervallIds();
+    document.getElementById('feedback-container').classList.add('d-none');
     resetIntervallIds();
     resetSoundIds();
     resetBackgroundMusic();
@@ -808,23 +814,41 @@ function gameOver() {
     world.level.bottles = [];
     world.throwableObjects = [];
 
-    // Leere das gesamte Canvas
     world.clearCanvas();
 
     // Zeichne nur den Hintergrund und den Charakter neu
     world.addObjectsToMap(world.level.backgroundObjects);  // Zeichne den Hintergrund
     world.addToMap(world.character);  // Zeichne den Charakter (Todesanimation läuft weiter)
 
-    // Optional: Hier könntest du zusätzliche Logik hinzufügen, wenn das Game-Over abgeschlossen ist
-    console.log('Game Over!');
-    document.getElementById('feedback-container').classList.remove('d-none');
-    document.getElementById('feedback').src = './assets/img/9_intro_outro_screens/game_over/oh no you lost!.png';
+    if (!test) {
+        document.getElementById('feedback-container').classList.remove('d-none');
+        document.getElementById('feedback').src = './assets/img/9_intro_outro_screens/game_over/oh no you lost!.png';
+        test = true;
+    }
+
 }
 
 
-
 function winScreen() {
-    alert('Win');
+
+    // Entferne alle Feinde und sammelbaren Objekte sofort
+    world.level.coins = [];
+    world.level.bottles = [];
+    world.throwableObjects = [];
+    world.level.enemies = [];
+    world.character.width = 0;
+    world.character.height = 0;
+
+    world.clearCanvas();
+
+    // Zeichne nur den Hintergrund und den Charakter neu
+    world.addObjectsToMap(world.level.backgroundObjects);  // Zeichne den Hintergrund
+
+    if (!test) {
+        document.getElementById('feedback-container').classList.remove('d-none');
+        document.getElementById('feedback').src = './assets/img/9_intro_outro_screens/win/win_2_edit.png';
+        test = true;
+    }
 
 }
 
@@ -953,10 +977,10 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault();
         });
         img.addEventListener('touchstart', function (event) {
-            event.preventDefault();
+            // event.preventDefault();
         });
         img.addEventListener('touchend', function (event) {
-            event.preventDefault();
+            // event.preventDefault();
         });
     });
 });

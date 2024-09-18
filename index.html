@@ -28,11 +28,12 @@
 </head>
 
 <body>
-    <h1>El Pollo Loco</h1>
+    <h1 class="header">El Pollo Loco</h1>
 
     <div id="container">
         <div id="startScreen">
-            <img id="startImg" src="./assets/img/9_intro_outro_screens/start/startscreen_1.png" alt="">
+            <img id="startImg" src="./assets/img/9_intro_outro_screens/start/startscreen_1.png" width="720" height="480"
+                alt="">
             <button id="startButton" class="startButton" type="button" onclick="init()">Start the <br> game</button>
             <button id="gameButton" class="icons game tooltip" type="button" onclick="showStart()"><img
                     src="./assets/img/game_play.png" alt="Game"><span class="tooltiptextleft">Start</span></button>
@@ -70,6 +71,11 @@
                 <img id="feedback" alt="">
             </div>
 
+        </div>
+        <div id="mobile-orientation">
+            <h1 class="mobile-orientation-header">El Pollo Loco</h1>
+            <p>Please turn your smartphone</p>
+            <img src="./assets/img/rotate-screen.png" alt="">
         </div>
     </div>
 

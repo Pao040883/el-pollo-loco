@@ -33,15 +33,11 @@ class Coins extends MovableObjects {
         '/assets/img/8_coin/coin_1.png'
     ];
 
-    constructor() {
+    constructor(x, y) {
         super().loadImage('./assets/img/8_coin/coin_1.png', 0.8);
-        this.setPosition();
+        this.x = x;
+        this.y = y;
         this.value = 10;
-    }
-
-    setPosition() {
-        this.x = 250 + Math.random() * 3500;
-        this.y = 140 + Math.random() * 120;
     }
 
     collect() {
