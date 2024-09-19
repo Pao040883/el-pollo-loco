@@ -1,688 +1,3 @@
-// let world;
-// let keyboard = new Keyboard();
-// let intervalIds = [];
-// let restartButton = document.getElementById('restartButton');
-// let homeButton = document.getElementById('homeButton');
-// let startImg;
-// let canvas;
-// let isGameStarted = false;
-// let isMuted = false;
-// let soundsMuted = false;
-// let backgroundMusic = new Sound('../../assets/audio/background.mp3', true, 0.3);
-// let allSounds = [];
-
-
-// function init() {
-//     generateElements();
-//     hideStartButtons();
-//     showStartButtons();
-//     showStart();
-//     startGame();
-//     world = new World(canvas, keyboard);
-// }
-
-// function startGame() {
-//     isGameStarted = true;
-
-//     if (!isMuted) {
-//         backgroundMusic.setVolume(0.5);
-//         backgroundMusic.play();
-//     }
-
-//     if (soundsMuted) {
-//         soundsMuted = true;
-//     } else {
-//         soundsMuted = false;
-
-//     }
-// }
-
-// function restartWorld() {
-//     world = null;
-//     resetIntervallIds();
-//     resetSoundIds();
-//     resetBackgroundMusic();
-//     isGameStarted = false;
-// }
-
-// function restart() {
-//     restartWorld();
-//     hideStartButtons();
-//     showStartButtons();
-//     init();
-// }
-
-// function goToHome() {
-//     restartWorld();
-//     showStartImage();
-//     showStartButtons();
-//     hideStartButtons();
-//     resetBackgroundMusic();
-// }
-
-// function showStartButtons() {
-//     const buttons = ['restartButton', 'homeButton'];
-//     buttons.forEach(id => document.getElementById(id).classList.toggle('d-none'));
-// }
-
-// function hideStartButtons() {
-//     const buttons = ['startButton', 'gameButton', 'infoButton', 'controlsButton'];
-//     buttons.forEach(id => document.getElementById(id).classList.toggle('d-none'));
-// }
-
-// function showStart() {
-//     world = null;
-//     startImg = document.getElementById('startImg');
-//     canvas = document.getElementById('canvas');
-//     canvas.classList.remove('d-none');
-//     startImg.classList.add('d-none');
-// }
-
-// function showStartImage() {
-//     canvas.classList.add('d-none');
-//     startImg.classList.remove('d-none');
-// }
-
-// function toggleBackgroundMusic() {
-//     let toggleMusic = document.getElementById('music');
-//     if (isMuted) {
-//         toggleMusic.src = '../../assets/img/music_on.png';
-//         if (isGameStarted) {
-//             backgroundMusic.setVolume(0.5);
-//             backgroundMusic.play();
-//         }
-//         isMuted = false;
-
-//     } else {
-//         toggleMusic.src = '../../assets/img/music_off.png';
-//         if (isGameStarted) {
-//             backgroundMusic.setVolume(0);
-//         }
-//         isMuted = true;
-//     }
-// }
-
-// function toggleSounds() {
-//     let toggleSounds = document.getElementById('sound');
-//     if (soundsMuted) {
-//         toggleSounds.src = '../../assets/img/mute.png';
-//         soundsMuted = false;
-//         if (isGameStarted) {
-//             muteAllSounds();
-//         }
-//     } else {
-//         toggleSounds.src = '../../assets/img/sound_on.png';
-//         soundsMuted = true;
-//         if (isGameStarted) {
-//             unMuteAllSounds();
-//         }
-//     }
-// }
-
-// function resetBackgroundMusic() {
-//     backgroundMusic.stop();
-// }
-
-// function muteAllSounds() {
-//     allSounds.forEach(sound => sound.mute());
-// }
-
-// function unMuteAllSounds() {
-//     allSounds.forEach(sound => sound.setVolume(0.5));
-// }
-
-// function setStoppableSound(path, loop, initialVolume) {
-//     let sound = new Sound(path, loop, initialVolume);
-//     allSounds.push(sound);
-//     return sound; // Gebe die Sound-Instanz zurück, damit sie in den Klassen verwendet werden kann
-// }
-
-// function resetSoundIds() {
-//     allSounds.forEach(clearInterval);
-//     allSounds = [];
-// }
-
-// function setStoppableInterval(fn, time) {
-//     let id = setInterval(fn, time);
-//     intervalIds.push(id);
-// }
-
-// function resetIntervallIds() {
-//     intervalIds.forEach(clearInterval);
-//     intervalIds = [];
-// }
-
-// window.addEventListener("keydown", (e) => {
-//     if (e.keyCode == 39) {
-//         keyboard.RIGHT = true;
-//     }
-//     if (e.keyCode == 37) {
-//         keyboard.LEFT = true;
-//     }
-//     if (e.keyCode == 38) {
-//         keyboard.UP = true;
-//     }
-//     if (e.keyCode == 40) {
-//         keyboard.DOWN = true;
-//     }
-//     if (e.keyCode == 32) {
-//         e.preventDefault();
-//         keyboard.SPACE = true;
-//     }
-//     if (e.keyCode == 68) {
-//         keyboard.D = true;
-//     }
-// });
-
-// window.addEventListener("keyup", (e) => {
-//     if (e.keyCode == 39) {
-//         keyboard.RIGHT = false;
-//     }
-//     if (e.keyCode == 37) {
-//         keyboard.LEFT = false;
-//     }
-//     if (e.keyCode == 38) {
-//         keyboard.UP = false;
-//     }
-//     if (e.keyCode == 40) {
-//         keyboard.DOWN = false;
-//     }
-//     if (e.keyCode == 32) {
-//         keyboard.SPACE = false;
-//     }
-//     if (e.keyCode == 68) {
-//         keyboard.D = false;
-//     }
-// });
-
-// let world;
-// let keyboard = new Keyboard();
-// let intervalIds = [];
-// let restartButton = document.getElementById('restartButton');
-// let homeButton = document.getElementById('homeButton');
-// let startImg;
-// let canvas;
-// let isGameStarted = false;
-// let isMuted = false;
-// let soundsMuted = false;
-// let backgroundMusic = new Sound('./assets/audio/background.mp3', true, 0.3);
-// let allSounds = [];
-
-// function init() {
-//     generateElements();
-//     hideStartButtons();
-//     showStartButtons();
-//     showStart();
-//     world = new World(canvas, keyboard);
-//     startGame();
-
-// }
-
-// function startGame() {
-//     isGameStarted = true;
-
-//     if (!isMuted) {
-//         backgroundMusic.setVolume(0.3);
-//         backgroundMusic.play();
-//     } else {
-//         backgroundMusic.setVolume(0);
-//     }
-
-//     if (soundsMuted) {
-//         muteAllSounds();
-//     }
-// }
-
-// function restartWorld() {
-//     world = null;
-//     resetIntervallIds();
-//     resetSoundIds();
-//     resetBackgroundMusic();
-//     isGameStarted = false;
-// }
-
-// function restart() {
-//     restartWorld();
-//     hideStartButtons();
-//     showStartButtons();
-//     init();
-// }
-
-// function goToHome() {
-//     restartWorld();
-//     showStartImage();
-//     showStartButtons();
-//     hideStartButtons();
-//     resetBackgroundMusic();
-// }
-
-// function showStartButtons() {
-//     const buttons = ['restartButton', 'homeButton'];
-//     buttons.forEach(id => document.getElementById(id).classList.toggle('d-none'));
-// }
-
-// function hideStartButtons() {
-//     const buttons = ['startButton', 'gameButton', 'infoButton', 'controlsButton'];
-//     buttons.forEach(id => document.getElementById(id).classList.toggle('d-none'));
-// }
-
-// function showStart() {
-//     world = null;
-//     startImg = document.getElementById('startImg');
-//     canvas = document.getElementById('canvas');
-//     canvas.classList.remove('d-none');
-//     startImg.classList.add('d-none');
-// }
-
-// function showStartImage() {
-//     canvas.classList.add('d-none');
-//     startImg.classList.remove('d-none');
-// }
-
-// function gameOver() {
-
-// }
-
-// function winScreen() {
-
-// }
-
-// function toggleBackgroundMusic() {
-//     let toggleMusic = document.getElementById('music');
-//     if (isMuted) {
-//         toggleMusic.src = './assets/img/music_on.png';
-//         isMuted = false;
-
-//         // Spiele die Musik, wenn das Spiel gestartet ist oder im Startbildschirm.
-//         if (isGameStarted) {
-//             backgroundMusic.setVolume(0.5);
-//             backgroundMusic.play();
-//         }
-//     } else {
-//         toggleMusic.src = './assets/img/music_off.png';
-//         isMuted = true;
-
-//         // Pausiere die Musik, wenn das Spiel gestartet ist oder im Startbildschirm.
-//         backgroundMusic.setVolume(0);
-//     }
-// }
-
-// function toggleSounds() {
-//     let toggleSounds = document.getElementById('sound');
-//     if (!soundsMuted) {
-//         toggleSounds.src = './assets/img/mute.png';
-//         soundsMuted = true;
-
-//         // Schalte die Sounds wieder an, auch wenn das Spiel noch nicht gestartet ist.
-//         if (isGameStarted || !isGameStarted) {
-//             muteAllSounds();
-//         }
-//     } else {
-//         toggleSounds.src = './assets/img/sound_on.png';
-//         soundsMuted = false;
-
-//         // Mute die Sounds, auch wenn das Spiel noch nicht gestartet ist.
-//         if (isGameStarted || !isGameStarted) {
-//             unMuteAllSounds();
-//         }
-//     }
-// }
-
-// function resetBackgroundMusic() {
-//     backgroundMusic.stop();
-// }
-
-// function muteAllSounds() {
-//     allSounds.forEach(sound => sound.mute());
-// }
-
-// function unMuteAllSounds() {
-//     allSounds.forEach(sound => sound.setVolume(0.5));
-// }
-
-// function setStoppableSound(path, loop, initialVolume) {
-//     let sound = new Sound(path, loop, initialVolume);
-//     allSounds.push(sound);
-//     return sound;
-// }
-
-// function resetSoundIds() {
-//     allSounds.forEach(sound => sound.dispose());
-//     allSounds.forEach(clearInterval);
-//     allSounds = [];
-// }
-
-// function setStoppableInterval(fn, time) {
-//     let id = setInterval(fn, time);
-//     intervalIds.push(id);
-// }
-
-// function resetIntervallIds() {
-//     intervalIds.forEach(clearInterval);
-//     intervalIds = [];
-// }
-
-// window.addEventListener("keydown", (e) => {
-//     if (e.keyCode == 39) {
-//         keyboard.RIGHT = true;
-//     }
-//     if (e.keyCode == 37) {
-//         keyboard.LEFT = true;
-//     }
-//     if (e.keyCode == 38) {
-//         keyboard.UP = true;
-//     }
-//     if (e.keyCode == 40) {
-//         keyboard.DOWN = true;
-//     }
-//     if (e.keyCode == 32) {
-//         e.preventDefault();
-//         keyboard.SPACE = true;
-//     }
-//     if (e.keyCode == 68) {
-//         keyboard.D = true;
-//     }
-// });
-
-// window.addEventListener("keyup", (e) => {
-//     if (e.keyCode == 39) {
-//         keyboard.RIGHT = false;
-//     }
-//     if (e.keyCode == 37) {
-//         keyboard.LEFT = false;
-//     }
-//     if (e.keyCode == 38) {
-//         keyboard.UP = false;
-//     }
-//     if (e.keyCode == 40) {
-//         keyboard.DOWN = false;
-//     }
-//     if (e.keyCode == 32) {
-//         keyboard.SPACE = false;
-//     }
-//     if (e.keyCode == 68) {
-//         keyboard.D = false;
-//     }
-// });
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     const images = document.querySelectorAll('img');
-//     images.forEach(img => {
-//         img.addEventListener('contextmenu', function (event) {
-//             event.preventDefault();
-//         });
-//         img.addEventListener('touchstart', function (event) {
-//             event.preventDefault();
-//         });
-//         img.addEventListener('touchend', function (event) {
-//             event.preventDefault();
-//         });
-//     });
-// });
-
-// let world;
-// let keyboard = new Keyboard();
-// let intervalIds = [];
-// let restartButton = document.getElementById('restartButton');
-// let homeButton = document.getElementById('homeButton');
-// let startImg;
-// let canvas;
-// let isGameStarted = false;
-// let isMuted = false;
-// let soundsMuted = false;
-// let backgroundMusic = new Sound('./assets/audio/background.mp3', true, 0.3);
-// let allSounds = [backgroundMusic]; // Alle Sounds, die geladen werden müssen
-
-// // Funktion zur Anzeige des Ladebalkens
-// function updateLoadingBar(progress) {
-//     let loadingBar = document.getElementById('loading-bar');
-//     loadingBar.style.width = progress + '%';
-// }
-
-// function resetLoadingBar() {
-//     let loadingBar = document.getElementById('loading-bar');
-//     loadingBar.style.width = 0;
-// }
-
-// function hideLoadingScreen() {
-//     let loadingContainer = document.getElementById('loading-container');
-//     loadingContainer.classList.add('d-none');
-// }
-
-// // Sounds laden und den Ladebalken aktualisieren
-// function loadSoundsAndStartGame() {
-//     document.getElementById('loading-container').classList.remove('d-none');
-//     let loadedSounds = 0;
-
-//     allSounds.forEach(sound => {
-//         sound.audio.addEventListener('canplaythrough', () => {
-//             loadedSounds++;
-//             let progress = (loadedSounds / allSounds.length) * 100;
-//             updateLoadingBar(progress);
-
-//             if (loadedSounds === allSounds.length) {
-//                 hideLoadingScreen();
-//                 resetLoadingBar();
-//                 startGame(); // Starte das Spiel, nachdem alle Sounds geladen sind
-//             }
-//         });
-
-//         // Startet das Laden des Sounds
-//         sound.audio.load();
-//     });
-// }
-
-// function init() {
-//     generateElements();
-//     hideStartButtons();
-//     showStartButtons();
-//     showStart();
-//     world = new World(canvas, keyboard);
-//     loadSoundsAndStartGame(); // Lade die Sounds, bevor das Spiel gestartet wird
-// }
-
-// function startGame() {
-//     isGameStarted = true;
-
-//     if (!isMuted) {
-//         backgroundMusic.setVolume(0.3);
-//         backgroundMusic.play();
-//     } else {
-//         backgroundMusic.setVolume(0);
-//     }
-
-//     if (soundsMuted) {
-//         muteAllSounds();
-//     }
-// }
-
-// function restartWorld() {
-//     world = null;
-//     resetIntervallIds();
-//     resetSoundIds();
-//     resetBackgroundMusic();
-//     isGameStarted = false;
-// }
-
-// function restart() {
-//     restartWorld();
-//     hideStartButtons();
-//     showStartButtons();
-//     init();
-// }
-
-// function goToHome() {
-//     restartWorld();
-//     showStartImage();
-//     showStartButtons();
-//     hideStartButtons();
-//     resetBackgroundMusic();
-// }
-
-// function showStartButtons() {
-//     const buttons = ['restartButton', 'homeButton'];
-//     buttons.forEach(id => document.getElementById(id).classList.toggle('d-none'));
-// }
-
-// function hideStartButtons() {
-//     const buttons = ['startButton', 'gameButton', 'infoButton', 'controlsButton'];
-//     buttons.forEach(id => document.getElementById(id).classList.toggle('d-none'));
-// }
-
-// function showStart() {
-//     world = null;
-//     startImg = document.getElementById('startImg');
-//     canvas = document.getElementById('canvas');
-//     canvas.classList.remove('d-none');
-//     startImg.classList.add('d-none');
-// }
-
-// function showStartImage() {
-//     canvas.classList.add('d-none');
-//     startImg.classList.remove('d-none');
-// }
-
-// function gameOver() {
-
-// }
-
-// function winScreen() {
-
-// }
-
-// function toggleBackgroundMusic() {
-//     let toggleMusic = document.getElementById('music');
-//     if (isMuted) {
-//         toggleMusic.src = './assets/img/music_on.png';
-//         isMuted = false;
-
-//         // Spiele die Musik, wenn das Spiel gestartet ist oder im Startbildschirm.
-//         if (isGameStarted) {
-//             backgroundMusic.setVolume(0.5);
-//             backgroundMusic.play();
-//         }
-//     } else {
-//         toggleMusic.src = './assets/img/music_off.png';
-//         isMuted = true;
-
-//         // Pausiere die Musik, wenn das Spiel gestartet ist oder im Startbildschirm.
-//         backgroundMusic.setVolume(0);
-//     }
-// }
-
-// function toggleSounds() {
-//     let toggleSounds = document.getElementById('sound');
-//     if (!soundsMuted) {
-//         toggleSounds.src = './assets/img/mute.png';
-//         soundsMuted = true;
-
-//         // Schalte die Sounds wieder an, auch wenn das Spiel noch nicht gestartet ist.
-//         if (isGameStarted || !isGameStarted) {
-//             muteAllSounds();
-//         }
-//     } else {
-//         toggleSounds.src = './assets/img/sound_on.png';
-//         soundsMuted = false;
-
-//         // Mute die Sounds, auch wenn das Spiel noch nicht gestartet ist.
-//         if (isGameStarted || !isGameStarted) {
-//             unMuteAllSounds();
-//         }
-//     }
-// }
-
-// function resetBackgroundMusic() {
-//     backgroundMusic.stop();
-// }
-
-// function muteAllSounds() {
-//     allSounds.forEach(sound => sound.mute());
-// }
-
-// function unMuteAllSounds() {
-//     allSounds.forEach(sound => sound.setVolume(0.5));
-// }
-
-// function setStoppableSound(path, loop, initialVolume) {
-//     let sound = new Sound(path, loop, initialVolume);
-//     allSounds.push(sound);
-//     return sound;
-// }
-
-// function resetSoundIds() {
-//     // allSounds.forEach(sound => sound.dispose());
-//     allSounds.forEach(clearInterval);
-//     allSounds = [];
-// }
-
-// function setStoppableInterval(fn, time) {
-//     let id = setInterval(fn, time);
-//     intervalIds.push(id);
-// }
-
-// function resetIntervallIds() {
-//     intervalIds.forEach(clearInterval);
-//     intervalIds = [];
-// }
-
-// window.addEventListener("keydown", (e) => {
-//     if (e.keyCode == 39) {
-//         keyboard.RIGHT = true;
-//     }
-//     if (e.keyCode == 37) {
-//         keyboard.LEFT = true;
-//     }
-//     if (e.keyCode == 38) {
-//         keyboard.UP = true;
-//     }
-//     if (e.keyCode == 40) {
-//         keyboard.DOWN = true;
-//     }
-//     if (e.keyCode == 32) {
-//         e.preventDefault();
-//         keyboard.SPACE = true;
-//     }
-//     if (e.keyCode == 68) {
-//         keyboard.D = true;
-//     }
-// });
-
-// window.addEventListener("keyup", (e) => {
-//     if (e.keyCode == 39) {
-//         keyboard.RIGHT = false;
-//     }
-//     if (e.keyCode == 37) {
-//         keyboard.LEFT = false;
-//     }
-//     if (e.keyCode == 38) {
-//         keyboard.UP = false;
-//     }
-//     if (e.keyCode == 40) {
-//         keyboard.DOWN = false;
-//     }
-//     if (e.keyCode == 32) {
-//         keyboard.SPACE = false;
-//     }
-//     if (e.keyCode == 68) {
-//         keyboard.D = false;
-//     }
-// });
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     const images = document.querySelectorAll('img');
-//     images.forEach(img => {
-//         img.addEventListener('contextmenu', function (event) {
-//             event.preventDefault();
-//         });
-//         img.addEventListener('touchstart', function (event) {
-//             event.preventDefault();
-//         });
-//         img.addEventListener('touchend', function (event) {
-//             event.preventDefault();
-//         });
-//     });
-// });
-
 let world;
 let keyboard = new Keyboard();
 let intervalIds = [];
@@ -696,25 +11,34 @@ let soundsMuted = false;
 let backgroundMusic = new Sound('./assets/audio/background.mp3', true, 0.3);
 let allSounds = [];
 let test = false;
+let winGame = false;
 
-
-// Funktion zur Anzeige des Ladebalkens
+/**
+ * Updates the loading bar with the current progress.
+ * @param {number} progress - The progress percentage to display.
+ */
 function updateLoadingBar(progress) {
     let loadingBar = document.getElementById('loading-bar');
     loadingBar.style.width = progress + '%';
 }
 
+/**
+ * Hides the loading screen by adding a 'd-none' class to the container.
+ */
 function hideLoadingScreen() {
     let loadingContainer = document.getElementById('loading-container');
     loadingContainer.classList.add('d-none');
 }
 
+/**
+ * Starts the game after a delay and displays a loading bar.
+ */
 function startGameAfterDelay() {
     let loadingContainer = document.getElementById('loading-container');
     loadingContainer.classList.remove('d-none');
     let progress = 0;
-    const duration = 2000; // 5 Sekunden Ladezeit
-    const intervalTime = 110; // Zeitintervall für das Fortschritts-Update
+    const duration = 2000; // 2 seconds load time
+    const intervalTime = 110; // Time interval for updating progress
     const totalIntervals = duration / intervalTime;
 
     const loadingInterval = setInterval(() => {
@@ -729,6 +53,9 @@ function startGameAfterDelay() {
     }, intervalTime);
 }
 
+/**
+ * Initializes the game, hides and shows buttons, and starts the loading sequence.
+ */
 function init() {
     generateElements();
     hideStartButtons();
@@ -736,13 +63,14 @@ function init() {
     startGameAfterDelay();
 }
 
+/**
+ * Starts the game, initializes the world, and manages the background music and sound settings.
+ */
 function startGame() {
     isGameStarted = true;
 
     showStart();
-
     world = new World(canvas, keyboard);
-
 
     if (!isMuted) {
         backgroundMusic.setVolume(0.3);
@@ -756,9 +84,12 @@ function startGame() {
     }
 
     test = false;
-
+    winGame = false;
 }
 
+/**
+ * Resets the world, intervals, and sound settings for a new game session.
+ */
 function restartWorld() {
     resetIntervallIds();
     document.getElementById('feedback-container').classList.add('d-none');
@@ -769,6 +100,9 @@ function restartWorld() {
     updateLoadingBar(0);
 }
 
+/**
+ * Restarts the game by resetting the world and reinitializing the game.
+ */
 function restart() {
     restartWorld();
     hideStartButtons();
@@ -776,6 +110,9 @@ function restart() {
     init();
 }
 
+/**
+ * Returns the game to the home/start screen.
+ */
 function goToHome() {
     restartWorld();
     showStartImage();
@@ -784,16 +121,25 @@ function goToHome() {
     resetBackgroundMusic();
 }
 
+/**
+ * Shows the game control buttons by toggling the 'd-none' class.
+ */
 function showStartButtons() {
     const buttons = ['restartButton', 'homeButton'];
     buttons.forEach(id => document.getElementById(id).classList.toggle('d-none'));
 }
 
+/**
+ * Hides the start buttons when the game begins.
+ */
 function hideStartButtons() {
-    const buttons = ['startButton', 'gameButton', 'infoButton', 'controlsButton'];
+    const buttons = ['startButton', 'infoButton', 'controlsButton'];
     buttons.forEach(id => document.getElementById(id).classList.toggle('d-none'));
 }
 
+/**
+ * Shows the canvas and hides the start image when the game starts.
+ */
 function showStart() {
     world = null;
     startImg = document.getElementById('startImg');
@@ -802,13 +148,18 @@ function showStart() {
     startImg.classList.add('d-none');
 }
 
+/**
+ * Shows the start image and hides the canvas when the player returns to the home screen.
+ */
 function showStartImage() {
     canvas.classList.add('d-none');
     startImg.classList.remove('d-none');
 }
 
+/**
+ * Displays the game over screen and removes all enemies and collectibles from the game.
+ */
 function gameOver() {
-    // Entferne alle Feinde und sammelbaren Objekte sofort
     world.level.enemies = [];
     world.level.coins = [];
     world.level.bottles = [];
@@ -816,9 +167,8 @@ function gameOver() {
 
     world.clearCanvas();
 
-    // Zeichne nur den Hintergrund und den Charakter neu
-    world.addObjectsToMap(world.level.backgroundObjects);  // Zeichne den Hintergrund
-    world.addToMap(world.character);  // Zeichne den Charakter (Todesanimation läuft weiter)
+    world.addObjectsToMap(world.level.backgroundObjects);
+    world.addToMap(world.character);
 
     if (!test) {
         document.getElementById('feedback-container').classList.remove('d-none');
@@ -828,10 +178,10 @@ function gameOver() {
 
 }
 
-
+/**
+ * Displays the win screen and removes all enemies and collectibles from the game.
+ */
 function winScreen() {
-
-    // Entferne alle Feinde und sammelbaren Objekte sofort
     world.level.coins = [];
     world.level.bottles = [];
     world.throwableObjects = [];
@@ -840,25 +190,24 @@ function winScreen() {
     world.character.height = 0;
 
     world.clearCanvas();
-
-    // Zeichne nur den Hintergrund und den Charakter neu
-    world.addObjectsToMap(world.level.backgroundObjects);  // Zeichne den Hintergrund
+    world.addObjectsToMap(world.level.backgroundObjects);
 
     if (!test) {
         document.getElementById('feedback-container').classList.remove('d-none');
         document.getElementById('feedback').src = './assets/img/9_intro_outro_screens/win/win_2_edit.png';
         test = true;
     }
-
+    winGame = true;
 }
 
+/**
+ * Toggles the background music on or off.
+ */
 function toggleBackgroundMusic() {
     let toggleMusic = document.getElementById('music');
     if (isMuted) {
         toggleMusic.src = './assets/img/music_on.png';
         isMuted = false;
-
-        // Spiele die Musik, wenn das Spiel gestartet ist oder im Startbildschirm.
         if (isGameStarted) {
             backgroundMusic.setVolume(0.5);
             backgroundMusic.play();
@@ -866,121 +215,118 @@ function toggleBackgroundMusic() {
     } else {
         toggleMusic.src = './assets/img/music_off.png';
         isMuted = true;
-
-        // Pausiere die Musik, wenn das Spiel gestartet ist oder im Startbildschirm.
         backgroundMusic.setVolume(0);
     }
 }
 
+/**
+ * Toggles the sound effects on or off.
+ */
 function toggleSounds() {
     let toggleSounds = document.getElementById('sound');
     if (!soundsMuted) {
         toggleSounds.src = './assets/img/mute.png';
         soundsMuted = true;
-
-        // Schalte die Sounds wieder an, auch wenn das Spiel noch nicht gestartet ist.
         if (isGameStarted || !isGameStarted) {
             muteAllSounds();
         }
     } else {
         toggleSounds.src = './assets/img/sound_on.png';
         soundsMuted = false;
-
-        // Mute die Sounds, auch wenn das Spiel noch nicht gestartet ist.
         if (isGameStarted || !isGameStarted) {
             unMuteAllSounds();
         }
     }
 }
 
+/**
+ * Stops the background music.
+ */
 function resetBackgroundMusic() {
     backgroundMusic.stop();
 }
 
+/**
+ * Mutes all game sounds.
+ */
 function muteAllSounds() {
     allSounds.forEach(sound => sound.mute());
 }
 
+/**
+ * Unmutes all game sounds.
+ */
 function unMuteAllSounds() {
     allSounds.forEach(sound => sound.setVolume(0.5));
 }
 
+/**
+ * Creates and returns a new stoppable sound instance.
+ * @param {string} path - The file path of the sound.
+ * @param {boolean} loop - Whether the sound should loop.
+ * @param {number} initialVolume - The initial volume of the sound.
+ * @returns {Sound} The created sound instance.
+ */
 function setStoppableSound(path, loop, initialVolume) {
     let sound = new Sound(path, loop, initialVolume);
     allSounds.push(sound);
     return sound;
 }
 
+/**
+ * Resets all sound instances by stopping and disposing of them.
+ */
 function resetSoundIds() {
     allSounds.forEach(sound => sound.dispose());
     allSounds.forEach(clearInterval);
     allSounds = [];
 }
 
+/**
+ * Sets an interval for a given function and pushes it to the intervalIds array.
+ * @param {function} fn - The function to execute at each interval.
+ * @param {number} time - The interval time in milliseconds.
+ */
 function setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
     intervalIds.push(id);
 }
 
+/**
+ * Clears all stored interval IDs.
+ */
 function resetIntervallIds() {
     intervalIds.forEach(clearInterval);
     intervalIds = [];
 }
 
 window.addEventListener("keydown", (e) => {
-    if (e.keyCode == 39) {
-        keyboard.RIGHT = true;
-    }
-    if (e.keyCode == 37) {
-        keyboard.LEFT = true;
-    }
-    if (e.keyCode == 38) {
-        keyboard.UP = true;
-    }
-    if (e.keyCode == 40) {
-        keyboard.DOWN = true;
-    }
+    if (e.keyCode == 39) keyboard.RIGHT = true;
+    if (e.keyCode == 37) keyboard.LEFT = true;
+    if (e.keyCode == 38) keyboard.UP = true;
+    if (e.keyCode == 40) keyboard.DOWN = true;
     if (e.keyCode == 32) {
         e.preventDefault();
         keyboard.SPACE = true;
     }
-    if (e.keyCode == 68) {
-        keyboard.D = true;
-    }
+    if (e.keyCode == 68) keyboard.D = true;
 });
 
 window.addEventListener("keyup", (e) => {
-    if (e.keyCode == 39) {
-        keyboard.RIGHT = false;
-    }
-    if (e.keyCode == 37) {
-        keyboard.LEFT = false;
-    }
-    if (e.keyCode == 38) {
-        keyboard.UP = false;
-    }
-    if (e.keyCode == 40) {
-        keyboard.DOWN = false;
-    }
-    if (e.keyCode == 32) {
-        keyboard.SPACE = false;
-    }
-    if (e.keyCode == 68) {
-        keyboard.D = false;
-    }
+    if (e.keyCode == 39) keyboard.RIGHT = false;
+    if (e.keyCode == 37) keyboard.LEFT = false;
+    if (e.keyCode == 38) keyboard.UP = false;
+    if (e.keyCode == 40) keyboard.DOWN = false;
+    if (e.keyCode == 32) keyboard.SPACE = false;
+    if (e.keyCode == 68) keyboard.D = false;
 });
 
+/**
+ * Prevents default context menu behaviors on images.
+ */
 document.addEventListener('DOMContentLoaded', function () {
     const images = document.querySelectorAll('img');
     images.forEach(img => {
-        img.addEventListener('contextmenu', function (event) {
-            event.preventDefault();
-        });
-        img.addEventListener('touchstart', function (event) {
-            // event.preventDefault();
-        });
-        img.addEventListener('touchend', function (event) {
-            // event.preventDefault();
-        });
+        img.addEventListener('contextmenu', event => event.preventDefault());
     });
 });

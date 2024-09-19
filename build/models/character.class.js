@@ -1,3 +1,8 @@
+/**
+ * Class representing the main character in the game.
+ * Inherits from the MovableObjects class and manages character animations, sounds, and movement.
+ * Handles user input through keyboard and mobile controls.
+ */
 class Character extends MovableObjects {
     height = 250;
     y = 180;
@@ -77,6 +82,9 @@ class Character extends MovableObjects {
     hurtSound = setStoppableSound('./assets/audio/hurt.mp3');
     deadSound = setStoppableSound('./assets/audio/character_death.mp3');
 
+    /**
+     * Creates a new character instance, loads images, and starts animations.
+     */
     constructor() {
         super().loadImage('./assets/img/2_character_pepe/2_walk/W-21.png');
         this.loadAllImages();
@@ -86,10 +94,12 @@ class Character extends MovableObjects {
         this.coins = 0;
         this.bottles = 0;
 
-
-        this.addMobileControls(); // Hier die mobilen Steuerelemente hinzufügen
+        this.addMobileControls();
     }
 
+    /**
+     * Loads all the character's animation images.
+     */
     loadAllImages() {
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONG_IDLE);
@@ -99,52 +109,116 @@ class Character extends MovableObjects {
         this.loadImages(this.IMAGES_HURT);
     }
 
+    /**
+     * Adds all the mobile controls for the character, linking them to specific actions.
+     */
     addMobileControls() {
+        this.setupMovementControls();
+        this.setupActionControls();
+    }
+
+    /**
+     * Sets up movement controls for the character (left and right).
+     * Links touch and mouse events to left and right movement.
+     */
+    setupMovementControls() {
         const leftButton = document.getElementById('move-left');
         const rightButton = document.getElementById('move-right');
+
+        this.addMovementControl(leftButton, 'LEFT');
+        this.addMovementControl(rightButton, 'RIGHT');
+    }
+
+    /**
+     * Sets up action controls for the character (jumping and throwing).
+     * Links touch and click events to jump and throw actions.
+     */
+    setupActionControls() {
         const jumpButton = document.getElementById('jump');
         const throwBottleButton = document.getElementById('throw-bottle');
 
-        const handleTouchStart = (direction) => {
-            this.world.keyboard[direction] = true;
-        };
-
-        const handleTouchEnd = (direction) => {
-            this.world.keyboard[direction] = false;
-        };
-
-        const handleMouseDown = (direction) => {
-            this.world.keyboard[direction] = true;
-        };
-
-        const handleMouseUp = (direction) => {
-            this.world.keyboard[direction] = false;
-        };
-
-        // Links bewegen
-        leftButton.addEventListener('touchstart', () => handleTouchStart('LEFT'));
-        leftButton.addEventListener('touchend', () => handleTouchEnd('LEFT'));
-        leftButton.addEventListener('touchcancel', () => handleTouchEnd('LEFT')); // Hinzufügen von touchcancel
-        leftButton.addEventListener('mousedown', () => handleMouseDown('LEFT'));
-        leftButton.addEventListener('mouseup', () => handleMouseUp('LEFT'));
-
-        // Rechts bewegen
-        rightButton.addEventListener('touchstart', () => handleTouchStart('RIGHT'));
-        rightButton.addEventListener('touchend', () => handleTouchEnd('RIGHT'));
-        rightButton.addEventListener('touchcancel', () => handleTouchEnd('RIGHT')); // Hinzufügen von touchcancel
-        rightButton.addEventListener('mousedown', () => handleMouseDown('RIGHT'));
-        rightButton.addEventListener('mouseup', () => handleMouseUp('RIGHT'));
-
-        // Springen
-        jumpButton.addEventListener('touchstart', () => this.triggerAction('SPACE'));
-        jumpButton.addEventListener('click', () => this.triggerAction('SPACE'));
-
-        // Flasche werfen
-        throwBottleButton.addEventListener('touchstart', () => this.triggerAction('D'));
-        throwBottleButton.addEventListener('click', () => this.triggerAction('D'));
+        this.addActionControl(jumpButton, 'SPACE');
+        this.addActionControl(throwBottleButton, 'D');
     }
 
+    /**
+     * Adds movement control for a specific button, linking it to a direction.
+     * @param {HTMLElement} button - The button element for movement.
+     * @param {string} direction - The direction the character should move ('LEFT' or 'RIGHT').
+     */
+    addMovementControl(button, direction) {
+        this.addTouchControl(button, direction);
+        this.addMouseControl(button, direction);
+    }
 
+    /**
+     * Adds action control for a specific button, linking it to an action.
+     * @param {HTMLElement} button - The button element for the action.
+     * @param {string} action - The action to be triggered (e.g., 'SPACE' for jump, 'D' for throw).
+     */
+    addActionControl(button, action) {
+        button.addEventListener('touchstart', () => this.triggerAction(action));
+        button.addEventListener('click', () => this.triggerAction(action));
+    }
+
+    /**
+     * Adds touch control to the specified button for movement.
+     * @param {HTMLElement} button - The button element.
+     * @param {string} direction - The direction to be triggered on touch ('LEFT' or 'RIGHT').
+     */
+    addTouchControl(button, direction) {
+        button.addEventListener('touchstart', () => this.handleTouchStart(direction));
+        button.addEventListener('touchend', () => this.handleTouchEnd(direction));
+        button.addEventListener('touchcancel', () => this.handleTouchEnd(direction));
+    }
+
+    /**
+     * Adds mouse control to the specified button for movement.
+     * @param {HTMLElement} button - The button element.
+     * @param {string} direction - The direction to be triggered on mouse events ('LEFT' or 'RIGHT').
+     */
+    addMouseControl(button, direction) {
+        button.addEventListener('mousedown', () => this.handleMouseDown(direction));
+        button.addEventListener('mouseup', () => this.handleMouseUp(direction));
+    }
+
+    /**
+     * Handles the start of a touch event, setting the movement direction.
+     * @param {string} direction - The direction the character should move ('LEFT' or 'RIGHT').
+     */
+    handleTouchStart(direction) {
+        this.world.keyboard[direction] = true;
+    }
+
+    /**
+     * Handles the end of a touch event, stopping the movement.
+     * @param {string} direction - The direction the character was moving ('LEFT' or 'RIGHT').
+     */
+    handleTouchEnd(direction) {
+        this.world.keyboard[direction] = false;
+    }
+
+    /**
+     * Handles the start of a mouse event, setting the movement direction.
+     * @param {string} direction - The direction the character should move ('LEFT' or 'RIGHT').
+     */
+    handleMouseDown(direction) {
+        this.world.keyboard[direction] = true;
+    }
+
+    /**
+     * Handles the end of a mouse event, stopping the movement.
+     * @param {string} direction - The direction the character was moving ('LEFT' or 'RIGHT').
+     */
+    handleMouseUp(direction) {
+        this.world.keyboard[direction] = false;
+    }
+
+    /**
+     * Triggers an action by setting a keyboard action and resetting it after a specified duration.
+     * @param {string} action - The action to trigger (e.g., 'SPACE' for jump).
+     * @param {number} [duration=150] - The duration for how long the action is triggered.
+     */
     triggerAction(action, duration = 150) {
         this.world.keyboard[action] = true;
         setTimeout(() => {
@@ -152,12 +226,19 @@ class Character extends MovableObjects {
         }, duration);
     }
 
+    /**
+     * Updates the time of the last action performed by the character.
+     * Resets idle status and stops snoring sound.
+     */
     updateLastActionTime() {
         this.lastActionTime = Date.now();
         this.isLongIdle = false;
         this.snoringSound.pause();
     }
 
+    /**
+     * Handles character jumping logic and plays the jump sound if the character is not already in the air.
+     */
     handleJump() {
         if (this.isDead()) return;
 
@@ -169,6 +250,9 @@ class Character extends MovableObjects {
         }
     }
 
+    /**
+     * Moves the character to the right if the right key is pressed and the character is within the level boundaries.
+     */
     handleMoveRight() {
         if (this.isDead()) return;
 
@@ -179,6 +263,9 @@ class Character extends MovableObjects {
         }
     }
 
+    /**
+     * Moves the character to the left if the left key is pressed and the character is within the level boundaries.
+     */
     handleMoveLeft() {
         if (this.isDead()) return;
 
@@ -190,16 +277,25 @@ class Character extends MovableObjects {
         }
     }
 
+    /**
+     * Moves the game camera based on the character's position.
+     */
     handleCameraMovement() {
         this.world.camera_x = -this.x + 200;
     }
 
+    /**
+     * Stops the walking sound if neither the left nor right movement keys are pressed.
+     */
     stopWalkingSound() {
         if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
             this.walkingSound.stop();
         }
     }
 
+    /**
+     * Handles all character movement actions including jumping and moving left or right.
+     */
     handleMovement() {
         this.handleJump();
         this.handleMoveRight();
@@ -207,26 +303,34 @@ class Character extends MovableObjects {
         this.handleCameraMovement();
     }
 
+    /**
+     * Checks if the character has been idle for too long, triggering the long idle state.
+     */
     checkIdleState() {
         if (Date.now() - this.lastActionTime > this.idleTimeout) {
             this.isLongIdle = true;
         }
     }
+
+    /**
+     * Plays the death animation and sound, then triggers the game over sequence.
+     */
     handleDeadAnimation() {
         if (this.isDead()) {
-            this.playAnimation(this.IMAGES_DEAD);  // Spiele die Todesanimation ab
+            this.playAnimation(this.IMAGES_DEAD);
             this.deadSound.play();
 
-            // Verzögere das Aufrufen der Game-Over-Logik, damit die Animation abgespielt wird
             setTimeout(() => {
-                this.deadSound.stop()
+                this.deadSound.stop();
                 this.stopWalkingSound();
-                gameOver();  // Rufe die Game-Over-Logik nach der Todesanimation auf
-            }, this.IMAGES_DEAD.length * 150);  // Warte die Zeit der Todesanimation ab
+                gameOver();
+            }, this.IMAGES_DEAD.length * 150);
         }
     }
 
-
+    /**
+     * Plays the hurt animation and sound when the character is injured.
+     */
     handleHurtAnimation() {
         if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
@@ -236,26 +340,38 @@ class Character extends MovableObjects {
         }
     }
 
+    /**
+     * Plays the jumping animation when the character is in the air.
+     */
     handleJumpAnimation() {
         if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
         }
     }
 
+    /**
+     * Plays the walking animation when the character is moving on the ground.
+     */
     handleWalkingAnimation() {
         if ((this.world.keyboard.RIGHT || this.world.keyboard.LEFT) && !this.isAboveGround()) {
             this.playAnimation(this.IMAGES_WALKING);
         }
     }
 
+    /**
+     * Plays the long idle animation when the character has been idle for a prolonged period.
+     */
     handleLongIdleAnimation() {
-        if (this.isLongIdle) {
+        if (this.isLongIdle && !winGame) {
             this.playAnimation(this.IMAGES_LONG_IDLE);
             this.stopWalkingSound();
             this.snoringSound.play();
         }
     }
 
+    /**
+     * Plays the regular idle animation when the character is standing still.
+     */
     handleIdleAnimation() {
         if (!this.isLongIdle && !this.isDead() && !this.isHurt() && !this.isAboveGround() && !this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
             this.stopWalkingSound();
@@ -263,9 +379,12 @@ class Character extends MovableObjects {
         }
     }
 
+    /**
+     * Handles the correct animation based on the character's current state (idle, walking, jumping, hurt, dead).
+     */
     handleAnimation() {
         if (this.isDead()) {
-            this.handleDeadAnimation(); // Nur die Todesanimation abspielen, wenn der Charakter tot ist
+            this.handleDeadAnimation();
         } else {
             this.handleHurtAnimation();
             this.handleJumpAnimation();
@@ -275,7 +394,9 @@ class Character extends MovableObjects {
         }
     }
 
-
+    /**
+     * Animates the character by handling movement and animations at fixed intervals.
+     */
     animate() {
         setStoppableInterval(() => {
             this.handleMovement();

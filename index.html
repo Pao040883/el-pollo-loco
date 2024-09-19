@@ -24,6 +24,7 @@
     <script src="./build/models/keyboard.class.js"></script>
     <script src="./build/models/level.class.js"></script>
     <script src="./build/levels/level1.js"></script>
+    <script src="./build/js/home.js"></script>
     <script src="./build/js/game.js"></script>
 </head>
 
@@ -35,11 +36,9 @@
             <img id="startImg" src="./assets/img/9_intro_outro_screens/start/startscreen_1.png" width="720" height="480"
                 alt="">
             <button id="startButton" class="startButton" type="button" onclick="init()">Start the <br> game</button>
-            <button id="gameButton" class="icons game tooltip" type="button" onclick="showStart()"><img
-                    src="./assets/img/game_play.png" alt="Game"><span class="tooltiptextleft">Start</span></button>
             <button id="infoButton" class="icons info tooltip" type="button" onclick="showInfo()"><img
                     src="./assets/img/info.png" alt="Infos"><span class="tooltiptextleft">Infos</span></button>
-            <button id="controlsButton" class="icons keyboard tooltip" type="button" onclick="showKeyboard()"><img
+            <button id="controlsButton" class="icons keyboard tooltip" type="button" onclick="showControls()"><img
                     src="./assets/img/keyboard.png" alt="Keyboard"><span
                     class="tooltiptextleft">Controls</span></button>
             <button class="icons mute tooltip" type="button" onclick="toggleSounds()"><img id="sound"
@@ -70,13 +69,50 @@
             <div id="feedback-container" class="d-none">
                 <img id="feedback" alt="">
             </div>
+            <div id="controls-container" class="d-none">
+                <img class="close" src="./assets/img/close.png" alt="" onclick="closeControls()">
+                <h2>Controlls</h2>
+                <div class="control-elements">
+                    <div>
 
+                        <div class="control-element">
+                            <img src="./assets/img/arrow_circle_left.png" alt="">
+                            <span>move left</span>
+                        </div>
+                        <div class="control-element">
+                            <img src="./assets/img/arrow_circle_right.png" alt="">
+                            <span>move right</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="control-element">
+                            <img src="./assets/img/arrow_circle_up.png" alt="">
+                            <span>jump</span>
+                        </div>
+                        <div class="control-element">
+                            <img class="throw-mobile" src="./assets/img/throw_circle.png" alt="">
+                            <img class="throw-desktop" src="./assets/img/throw_d_circle.png" alt="">
+                            <span>throw</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="mobile-orientation">
-            <h1 class="mobile-orientation-header">El Pollo Loco</h1>
-            <p>Please turn your smartphone</p>
-            <img src="./assets/img/rotate-screen.png" alt="">
+        <div id="info-container" class="d-none">
+            <img class="close" src="./assets/img/close.png" alt="" onclick="closeInfo()">
+            <h2>Informations</h2>
+            <div>
+                <button id="impressum-button" onclick="loadLegalNotice()">Legal Notice</button>
+                <button id="datenschutz-button" onclick="loadPrivacyPolicy()">Privacy Policy</button>
+            </div>
+            <div id="information-content" class="information-content d-none"></div>
         </div>
+    </div>
+    <div id="mobile-orientation">
+        <h1 class="mobile-orientation-header">El Pollo Loco</h1>
+        <p>Please turn your smartphone</p>
+        <img src="./assets/img/rotate-screen.png" alt="">
+    </div>
     </div>
 
 </body>

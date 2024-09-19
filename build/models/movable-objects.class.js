@@ -1,4 +1,11 @@
+/**
+ * Class representing a movable object in the game.
+ * Inherits from DrawableObject and manages movement, gravity, collisions, and object state.
+ */
 class MovableObjects extends DrawableObject {
+    /**
+     * Creates a new movable object.
+     */
     constructor() {
         super();
         this.speed = 0.15;
@@ -15,33 +22,59 @@ class MovableObjects extends DrawableObject {
         this.endbossDeadSound = setStoppableSound('./assets/audio/chicken_dead.mp3', false, 0.5);
     }
 
+    /**
+     * Applies gravity to the object, pulling it downward over time.
+     */
     applyGravity() {
         this.gravityInterval = setInterval(() => {
-            if (this.isAboveGround() || this.speedY > 0) {
+            if (this.shouldApplyGravity()) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
         }, 1000 / 25);
     }
 
+    /**
+     * Stops the gravity effect on the object.
+     */
     stopGravity() {
         if (this.gravityInterval) {
             clearInterval(this.gravityInterval);
         }
     }
 
+    /**
+     * Checks if the object is above ground level.
+     * @returns {boolean} - True if the object is above ground, false otherwise.
+     */
     isAboveGround() {
         return this.y < this.getGroundLevel();
     }
 
-    getGroundLevel() {
-        if (this instanceof ThrowableObject) return Infinity; // Flaschen sollen nicht auf dem Boden landen
-        if (this instanceof Chick) return 370; // Spezielle Höhe für bestimmte Gegner
-        return 180; // Standard-Bodenhöhe
+    /**
+     * Determines if gravity should be applied to the object.
+     * @returns {boolean} - True if gravity should be applied, false otherwise.
+     */
+    shouldApplyGravity() {
+        return this.isAboveGround() || this.speedY > 0;
     }
 
+    /**
+     * Determines the ground level based on the object type.
+     * @returns {number} - The y-coordinate of the ground level.
+     */
+    getGroundLevel() {
+        if (this instanceof ThrowableObject) return Infinity;
+        if (this instanceof Chick) return 370;
+        return 180;
+    }
+
+    /**
+     * Checks if the object is colliding with another object.
+     * @param {MovableObjects} mo - The other movable object to check collision with.
+     * @returns {boolean} - True if a collision is detected, false otherwise.
+     */
     isColliding(mo) {
-        // Überprüfung auf Kollision zwischen zwei Objekten
         return (
             this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
@@ -50,57 +83,89 @@ class MovableObjects extends DrawableObject {
         );
     }
 
+    /**
+     * Reduces the object's energy when hit.
+     * @param {number} [damage=10] - The amount of damage to apply.
+     */
     hit(damage = 10) {
-        // Schaden zufügen und verhindern, dass die Energie unter 0 fällt
         this.energy = Math.max(0, this.energy - damage);
         if (this.energy > 0) {
-            this.lastHit = Date.now(); // Zeitpunkt des letzten Treffers
+            this.updateLastHit();
         }
     }
 
     /**
-     * Sammle Coins oder Bottles, basierend auf dem übergebenen Item-Typ
-     * @param {string} itemType - Der Typ des Items, entweder 'coin' oder 'bottle'
+     * Updates the timestamp of the last hit taken by the object.
+     */
+    updateLastHit() {
+        this.lastHit = Date.now();
+    }
+
+    /**
+     * Adds to the object's collected items (coins or bottles).
+     * @param {string} itemType - The type of item to collect ('coin' or 'bottle').
      */
     collect(itemType) {
         if (itemType === 'coin') {
-            this.coins += 10; // Sammle eine Münze
+            this.coins += 10;
         } else if (itemType === 'bottle') {
-            this.bottles += 10; // Sammle eine Flasche
+            this.bottles += 10;
         }
     }
 
+    /**
+     * Checks if the object's energy has reached zero.
+     * @returns {boolean} - True if the object is dead, false otherwise.
+     */
     isDead() {
         return this.energy === 0;
     }
 
+    /**
+     * Checks if the object is currently hurt (within half a second of last hit).
+     * @returns {boolean} - True if the object is hurt, false otherwise.
+     */
     isHurt() {
-        // Überprüfen, ob das Objekt kürzlich getroffen wurde
-        return (Date.now() - this.lastHit) / 1000 < 0.5; // Objekt ist für 0.5 Sekunden "verletzt"
+        return (Date.now() - this.lastHit) / 1000 < 0.5;
     }
 
+    /**
+     * Plays an animation from a list of images.
+     * @param {Array} images - The list of images for the animation.
+     */
     playAnimation(images) {
-        // Spielt die Animation durch Wechslen der Bilder
-        let i = this.currentImage % images.length;
+        const i = this.currentImage % images.length;
         this.img = this.imageCache[images[i]];
         this.currentImage++;
     }
 
+    /**
+     * Moves the object to the right.
+     */
     moveRight() {
         this.x += this.speed;
-        this.otherDirection = false; // Blickrichtung nach rechts
+        this.otherDirection = false;
     }
 
+    /**
+     * Moves the object to the left.
+     */
     moveLeft() {
         this.x -= this.speed;
     }
 
+    /**
+     * Causes the object to jump by setting its vertical speed.
+     * @param {number} speed - The speed to set for the jump.
+     */
     jump(speed) {
-        this.speedY = speed; // Setzt die vertikale Geschwindigkeit für den Sprung
+        this.speedY = speed;
     }
 
+    /**
+     * Hides the object after it has been collected by setting its dimensions to zero.
+     */
     hideAfterCollect() {
-        // Versteckt das Objekt nach dem Einsammeln
         this.width = 0;
         this.height = 0;
     }
