@@ -52,6 +52,13 @@ class Endboss extends MovableObjects {
     endbossArriveSound = setStoppableSound('./assets/audio/endboss_arrive.mp3', false, 1);
     endbossDeathSound = setStoppableSound('./assets/audio/endboss_death.mp3', false, 1);
 
+    offset = {
+        top: 25,
+        left: 25,
+        right: 25,
+        bottom: 25
+    };
+
     /**
      * Creates a new Endboss instance, sets its position, loads images, but doesn't start movement until activated.
      */

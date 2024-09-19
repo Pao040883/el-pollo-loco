@@ -3,7 +3,7 @@
  * Inherits from the MovableObjects class and manages animations, movement, and gravity.
  */
 class Chick extends MovableObjects {
-    y = 370;
+    y = 360;
     height = 45;
     width = 60;
     speed = 10;
@@ -18,6 +18,13 @@ class Chick extends MovableObjects {
         './assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png'
     ];
 
+    offset = {
+        top: 5,
+        left: 5,
+        right: 5,
+        bottom: 5
+    };
+
     /**
      * Creates a new Chick instance, sets its position and speed, and starts the animation.
      */
@@ -27,7 +34,7 @@ class Chick extends MovableObjects {
         this.loadImages(this.IMAGES_DEAD);
         this.setPosition();
         this.setSpeed();
-        this.energy = 5;
+        this.energy = 10;
         this.applyGravity();
         this.startAnimations();
     }

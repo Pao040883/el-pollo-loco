@@ -68,21 +68,17 @@ function init() {
  */
 function startGame() {
     isGameStarted = true;
-
     showStart();
     world = new World(canvas, keyboard);
-
     if (!isMuted) {
         backgroundMusic.setVolume(0.3);
         backgroundMusic.play();
     } else {
         backgroundMusic.setVolume(0);
     }
-
     if (soundsMuted) {
         muteAllSounds();
     }
-
     test = false;
     winGame = false;
 }
@@ -114,11 +110,13 @@ function restart() {
  * Returns the game to the home/start screen.
  */
 function goToHome() {
-    restartWorld();
-    showStartImage();
-    showStartButtons();
-    hideStartButtons();
-    resetBackgroundMusic();
+    if (isGameStarted) {
+        restartWorld();
+        showStartImage();
+        showStartButtons();
+        hideStartButtons();
+        resetBackgroundMusic();
+    }
 }
 
 /**

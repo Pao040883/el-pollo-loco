@@ -67,7 +67,7 @@ canvas {
 .startButton {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 50px;
     transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
@@ -236,7 +236,7 @@ canvas {
     height: 75px;
     background-color: #FFB500;
     position: absolute;
-    top: 50%;
+    top: 50px;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
@@ -410,6 +410,16 @@ canvas {
     }
 
     .throw-desktop {
+        display: none;
+    }
+
+    .icons {
+        width: 35px;
+        height: 35px;
+    }
+
+    .tooltiptextleft,
+    .tooltiptextright {
         display: none;
     }
 }

@@ -113,6 +113,7 @@ function generateBottles() {
     return [
         new Bottles(), new Bottles(), new Bottles(), new Bottles(), new Bottles(),
         new Bottles(), new Bottles(), new Bottles(), new Bottles(), new Bottles(),
+        new Bottles(), new Bottles(), new Bottles(), new Bottles(), new Bottles(),
         new Bottles(), new Bottles(), new Bottles()
     ];
 }

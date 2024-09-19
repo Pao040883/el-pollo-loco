@@ -7,7 +7,6 @@ class Chicken extends MovableObjects {
     height = 55;
     width = 70;
     speed = 10;
-    energy = 10;
     chickenSound = setStoppableSound('./assets/audio/chicken.mp3', true);
 
     IMAGES_WALKING = [
@@ -20,6 +19,13 @@ class Chicken extends MovableObjects {
         './assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
     ];
 
+    offset = {
+        top: 5,
+        left: 5,
+        right: 5,
+        bottom: 5
+    };
+
     /**
      * Creates a new Chicken instance, sets position and speed, loads images, and starts animation.
      */
@@ -29,6 +35,7 @@ class Chicken extends MovableObjects {
         this.loadImages(this.IMAGES_DEAD);
         this.setPosition();
         this.setSpeed();
+        this.energy = 10;
         this.startAnimations();
     }
 

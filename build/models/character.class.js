@@ -82,6 +82,13 @@ class Character extends MovableObjects {
     hurtSound = setStoppableSound('./assets/audio/hurt.mp3');
     deadSound = setStoppableSound('./assets/audio/character_death.mp3');
 
+    offset = {
+        top: 120,
+        left: 30,
+        right: 40,
+        bottom: 30,
+    };
+
     /**
      * Creates a new character instance, loads images, and starts animations.
      */

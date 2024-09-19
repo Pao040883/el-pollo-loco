@@ -15,6 +15,7 @@ class World {
     endbossBar = new StatusBar(endbossBarImages, 510, 50, 200, 60, 0);
     throwableObjects = [];
     endbossActive = false;
+    isBottleActive = false;
 
     /**
      * Creates a new game world instance.
@@ -46,10 +47,12 @@ class World {
 
     /**
      * Checks if the player is pressing the throw key (D) and adds a throwable object (bottle).
+     * Only allows throwing a bottle if none is currently active.
      */
     checkThrowObjects() {
-        if (this.keyboard.D) {
+        if (this.keyboard.D && !this.isBottleActive) {  // Prüfe, ob keine Flasche aktiv ist
             this.addThrowableObject();
+            this.isBottleActive = true;  // Flasche ist jetzt aktiv
         }
     }
 
@@ -59,6 +62,11 @@ class World {
     addThrowableObject() {
         const bottle = new ThrowableObject(this.character.x, this.character.y + 100, this);
         this.throwableObjects.push(bottle);
+
+        // Flasche verschwunden oder Ziel erreicht, Flag zurücksetzen
+        setTimeout(() => {
+            this.isBottleActive = false; // Setze die Flag zurück
+        }, 500);  // Beispielhaft nach 3 Sekunden (abhängig von deiner Spielmechanik)
     }
 
     /**
@@ -100,12 +108,14 @@ class World {
      * @param {Object} enemy - The enemy that the character collides with.
      */
     handleEnemyCollision(enemy) {
-        if (this.character.isAboveGround() && !enemy.isBoss) {
+        if (this.character.isAboveGround() && this.character.speedY < 0 && (this.character.y + this.character.height - enemy.height - this.character.speedY > enemy.y - enemy.offset.top - enemy.offset.bottom) &&
+            !enemy.isBoss) {
             this.handleJumpCollision(enemy);
         } else {
             this.handleDirectOrBossCollision(enemy);
         }
     }
+
 
     /**
      * Handles logic when the character jumps on an enemy.
@@ -114,7 +124,6 @@ class World {
     handleJumpCollision(enemy) {
         enemy.hit();
         enemy.chickenDeadSound.play(); // Play the sound
-        this.character.jump(20);
     }
 
     /**
@@ -130,14 +139,19 @@ class World {
     }
 
     /**
-     * Handles logic for direct collisions with non-boss enemies.
-     * @param {Object} enemy - The enemy that the character collides with.
-     */
+     * 
+    * Handles logic for direct collisions with non-boss enemies.
+    * @param {Object} enemy - The enemy that the character collides with.
+    */
     handleDirectCollision(enemy) {
         this.character.hit();
         this.healthBar.setPercentage(this.character.energy);
-        enemy.hasHit = true;  // Only for non-boss enemies
+        enemy.hasHit = true;  // Gegner verursacht keinen Schaden mehr
+        setTimeout(() => {
+            enemy.hasHit = false;  // Nach 1 Sekunde kann der Gegner wieder Schaden verursachen
+        }, 1000);  // 1000 Millisekunden = 1 Sekunde
     }
+
 
     /**
      * Handles logic for collisions with the boss, including the cooldown between hits.
@@ -203,16 +217,17 @@ class World {
     }
 
     /**
-     * Handles the logic when a bottle hits an enemy or boss.
-     * @param {Object} bottle - The throwable object that collides with the enemy.
-     * @param {Object} enemy - The enemy or boss that the bottle hits.
-     */
+ * Handles the logic when a bottle hits an enemy or boss.
+ * @param {Object} bottle - The throwable object that collides with the enemy.
+ * @param {Object} enemy - The enemy or boss that the bottle hits.
+ */
     handleBottleHitEnemy(bottle, enemy) {
         enemy.hit();
         bottle.hitByBottle = true;
         if (enemy.isBoss) {
             enemy.startHurtAnimation();
             enemy.endbossDeadSound.play();
+            this.endbossBar.setPercentage(enemy.energy);  // Aktualisiere die Endboss-Statusbar
         } else {
             enemy.chickenDeadSound.play();
         }
@@ -270,6 +285,7 @@ class World {
         if (this.endbossActive) {
             this.addToMap(this.endbossBar); // Zeige die Endboss-Leiste nur, wenn der Endboss aktiviert ist
         }
+
     }
 
     /**
